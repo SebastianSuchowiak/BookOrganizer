@@ -1,0 +1,2 @@
+rootProject.name='BookOrganizer'
+include ':app'
