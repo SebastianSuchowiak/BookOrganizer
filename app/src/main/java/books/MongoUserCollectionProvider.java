@@ -1,46 +1,84 @@
 package books;
 
-import agh.wtm.books.model.User;
 
+
+
+import com.mongodb.ConnectionString;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObjectCodecProvider;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
-
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 
-import javax.print.Doc;
+import org.bson.Document;
+import org.bson.codecs.BsonValueCodecProvider;
+import org.bson.codecs.Codec;
+import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+
+import books.model.Book;
+import books.model.User;
+import books.repository.codec.BookCodec;
+import books.repository.codec.UserCodec;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class MongoUserCollectionProvider {
+
+public class MongoUserCollectionProvider  {
 
     public static final String DATABASE = "bookOrganizer";
-    public static final String CONNECTION_STRING = "mongodb+srv://RWuser:3usJZpQtsLAfFWsW@bookorganizer-hl9sd.mongodb.net/bookOrganizer?retryWrites=true&w=majority";
+
+    public static final String CONNECTION_STRING ="mongodb://RWuser:3usJZpQtsLAfFWsW@bookorganizer-shard-00-00-hl9sd.mongodb.net:27017,bookorganizer-shard-00-01-hl9sd.mongodb.net:27017,bookorganizer-shard-00-02-hl9sd.mongodb.net:27017/bookOrganizer?ssl=true&replicaSet=BookOrganizer-shard-0&authSource=admin&retryWrites=true&w=majority";
     public static final String COLLECTION = "users";
 
     private static MongoClient mongoClient;
+
+    private static MongoCollection userCollection;
 
     private MongoUserCollectionProvider() {
 
     }
 
-    public static MongoCollection<User> getUsersCollection() {
+    public static DBCollection getCollection(){
         if (mongoClient == null) {
             MongoClientURI uri = new MongoClientURI(CONNECTION_STRING);
             mongoClient = new MongoClient(uri);
         }
-
         MongoDatabase database = mongoClient.getDatabase(DATABASE);
-        CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-        MongoCollection<User> collection = database.getCollection(COLLECTION, User.class).withCodecRegistry(pojoCodecRegistry);
+        return (DBCollection) database.getCollection(COLLECTION);
 
-        return collection;
+    }
+
+    public static MongoCollection<User> getUsersCollection() {
+        if(userCollection != null){
+            return userCollection;
+        }
+        CodecRegistry codecRegistry = MongoClient.getDefaultCodecRegistry();
+        Codec<Document> documentCodec = codecRegistry.get(Document.class);
+        Codec<Book> bookCodec = new BookCodec(codecRegistry);
+        Codec<User> userCodec = new UserCodec(codecRegistry);
+        codecRegistry = CodecRegistries.fromRegistries(
+                MongoClient.getDefaultCodecRegistry(),
+                CodecRegistries.fromCodecs(
+                        documentCodec,
+                        bookCodec,
+                        userCodec
+
+                ));
+        MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
+
+        MongoClientURI uri = new MongoClientURI(CONNECTION_STRING,new MongoClientOptions.Builder(options));
+        MongoClient mongo = new MongoClient(uri);
+        MongoDatabase database = mongo.getDatabase(DATABASE);
+        userCollection = database.getCollection(COLLECTION, User.class);
+        return  userCollection;
     }
 
 }

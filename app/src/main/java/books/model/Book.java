@@ -5,7 +5,6 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 @Data
-@Builder
 public class Book {
     private ObjectId id;
     private String title;

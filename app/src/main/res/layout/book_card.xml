@@ -63,7 +63,6 @@
                 app:tag_text_color="@android:color/white"
                 app:container_background_color="@color/colorPrimary"
                 app:tag_text_size="10sp"
-                app:tag_padding="2dp"
                 app:tag_corner_radius="5dp"
                 app:container_enable_drag="false"
                 app:horizontal_interval="10dp"
