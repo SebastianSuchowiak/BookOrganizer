@@ -5,6 +5,7 @@
     <color name="colorTextLight">#65635D</color>
     <color name="colorTextDark">#222121</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorTagTest">#8803DA</color>
     <color name="colorTrans">#80000000</color>
 
     <color name="primary">#a06f6f</color>
