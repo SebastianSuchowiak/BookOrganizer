@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
@@ -111,12 +111,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         Log.d(TAG, "Login successful");
-        finish();
     }
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
