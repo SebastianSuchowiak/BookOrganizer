@@ -1,7 +1,5 @@
 package books.repository.codec;
 
-import com.mongodb.BasicDBList;
-
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -34,15 +32,10 @@ public class BookConverter {
         Book book = new Book();
         book.setTitle(document.getString("title"));
         book.setIsbn(document.getDouble("isbn"));
-//        BasicDBList authors = (BasicDBList) document.get("authors");
-//        List<String> bookAuthors = new ArrayList<String>();
-//        for (Object o : authors) {
-//            bookAuthors.add((String) o);
-//        }
         book.setAuthors((List<String>) document.get("authors"));
         book.setStatus(Status.valueOf(document.getString("status")));
         book.setImageUrl(document.getString("imageUrl"));
-        book.setScore(document.getInteger("score"));
+        book.setScore(document.getDouble("score").intValue());
         book.setReview(document.getString("review"));
         List<Tag> tags = new ArrayList<>();
         for (Document tagDocument: (List<Document>) document.get("tags")) {

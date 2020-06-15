@@ -84,10 +84,13 @@ public class UserCodec implements CollectibleCodec<User> {
         user.setHashedPassword(document.getString("hashedPassword"));
         user.setTheme(Theme.valueOf(document.getString("theme")));
         ArrayList<Document> docArr = (ArrayList) document.get("books");
+        System.out.println(docArr);
+        ArrayList<Book> books = new ArrayList<>();
         for (Document doc : docArr) {
             Book book = this.bookConverter.convert(doc);
-            user.getBooks().add(book);
+            books.add(book);
         }
+        user.setBooks(books);
 
         return user;
     }

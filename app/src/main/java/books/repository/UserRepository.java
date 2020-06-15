@@ -1,7 +1,7 @@
 package books.repository;
 
-import com.mongodb.DBCollection;
 import com.mongodb.client.MongoCollection;
+
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -10,13 +10,11 @@ import books.MongoUserCollectionProvider;
 import books.Password;
 import books.model.Achievement;
 import books.model.Book;
-import books.model.Status;
-import books.model.Tag;
 import books.model.Theme;
 import books.model.User;
 
-import static books.model.Status.HAVE_TO_READ;
-import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 
 public class UserRepository {
 
@@ -26,7 +24,7 @@ public class UserRepository {
         return collection.find(new Document("name", name)).first() != null;
     }
 
-    public static boolean login(String name,String password) throws Exception{
+    public static boolean login(String name, String password) throws Exception {
         new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
 
