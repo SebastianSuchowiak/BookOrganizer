@@ -21,11 +21,13 @@ import static com.mongodb.client.model.Filters.*;
 public class UserRepository {
 
     public static boolean userExists(String name) {
+        new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
         return collection.find(new Document("name", name)).first() != null;
     }
 
     public static boolean login(String name,String password) throws Exception{
+        new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
 
         if (!userExists(name)) {
@@ -40,6 +42,7 @@ public class UserRepository {
     }
 
     public static void registerUser(String name, String password) throws Exception {
+        new MongoUserCollectionProvider();
         MongoCollection collection = MongoUserCollectionProvider.getUsersCollection();
 
         if (userExists(name)) {
@@ -66,6 +69,7 @@ public class UserRepository {
     }
 
     public static User getUser(String userName, String password) throws Exception {
+        new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
 
         if (!userExists(userName)) {
@@ -81,6 +85,7 @@ public class UserRepository {
     }
 
     public static void updateUser(User user) {
+        new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
         collection.replaceOne(and(eq("name", user.getName()), eq("_id", user.getId())), user);
     }

@@ -7,7 +7,11 @@ import lombok.Data;
 
 @Data
 public class Tag {
-    private ObjectId id;
     private String name;
     private String color;
+
+    public Tag(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
 }

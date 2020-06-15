@@ -22,9 +22,11 @@ import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import books.model.Book;
 import books.model.User;
-import books.repository.codec.BookCodec;
 import books.repository.codec.UserCodec;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -35,26 +37,12 @@ public class MongoUserCollectionProvider  {
 
     public static final String DATABASE = "bookOrganizer";
 
-    public static final String CONNECTION_STRING ="mongodb://RWuser:3usJZpQtsLAfFWsW@bookorganizer-shard-00-00-hl9sd.mongodb.net:27017,bookorganizer-shard-00-01-hl9sd.mongodb.net:27017,bookorganizer-shard-00-02-hl9sd.mongodb.net:27017/bookOrganizer?ssl=true&replicaSet=BookOrganizer-shard-0&authSource=admin&retryWrites=true&w=majority";
+    public static final String CONNECTION_STRING ="mongodb://RWuser:3usJZpQtsLAfFWsW@bookorganizer-shard-00-00-hl9sd.mongodb.net:27017,bookorganizer-shard-00-01-hl9sd.mongodb.net:27017,bookorganizer-shard-00-02-hl9sd.mongodb.net:27017/bookOrganizer?ssl=true&replicaSet=BookOrganizer-shard-0&authSource=admin&w=majority";
     public static final String COLLECTION = "users";
 
     private static MongoClient mongoClient;
 
     private static MongoCollection userCollection;
-
-    private MongoUserCollectionProvider() {
-
-    }
-
-    public static DBCollection getCollection(){
-        if (mongoClient == null) {
-            MongoClientURI uri = new MongoClientURI(CONNECTION_STRING);
-            mongoClient = new MongoClient(uri);
-        }
-        MongoDatabase database = mongoClient.getDatabase(DATABASE);
-        return (DBCollection) database.getCollection(COLLECTION);
-
-    }
 
     public static MongoCollection<User> getUsersCollection() {
         if(userCollection != null){
@@ -62,13 +50,11 @@ public class MongoUserCollectionProvider  {
         }
         CodecRegistry codecRegistry = MongoClient.getDefaultCodecRegistry();
         Codec<Document> documentCodec = codecRegistry.get(Document.class);
-        Codec<Book> bookCodec = new BookCodec(codecRegistry);
         Codec<User> userCodec = new UserCodec(codecRegistry);
         codecRegistry = CodecRegistries.fromRegistries(
                 MongoClient.getDefaultCodecRegistry(),
                 CodecRegistries.fromCodecs(
                         documentCodec,
-                        bookCodec,
                         userCodec
 
                 ));
@@ -78,6 +64,10 @@ public class MongoUserCollectionProvider  {
         MongoClient mongo = new MongoClient(uri);
         MongoDatabase database = mongo.getDatabase(DATABASE);
         userCollection = database.getCollection(COLLECTION, User.class);
+
+        Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
+        mongoLogger.setLevel(Level.SEVERE);
+
         return  userCollection;
     }
 
