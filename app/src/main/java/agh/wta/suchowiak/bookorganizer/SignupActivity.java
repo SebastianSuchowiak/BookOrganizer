@@ -70,19 +70,26 @@ public class SignupActivity extends AppCompatActivity {
         String name = _nameText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        boolean registerStatus = false;
         try {
             UserRepository.registerUser(name,password);
+            registerStatus = true;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
+            registerStatus = false;
         }
-
+        final boolean finalRegisterStatus = registerStatus;
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+                        if(finalRegisterStatus){
+                            onSignupSuccess();
+                        }
+                        else{
+                            onSignupFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -98,7 +105,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Register failed", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
