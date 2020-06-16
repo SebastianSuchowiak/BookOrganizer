@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
     app:cardCornerRadius="25dp"
-    app:cardBackgroundColor="@color/colorPrimary"
-    android:layout_margin="15dp">
+    app:cardBackgroundColor="@color/primary"
+    app:cardElevation="0dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
         <ImageView
             android:id="@+id/cover"
             android:layout_width="90dp"
-            android:layout_height="130dp"
+            android:layout_height="140dp"
             android:padding="10dp"/>
 
         <LinearLayout
@@ -28,7 +30,7 @@
             <TextView
                 android:id="@+id/title"
                 android:textSize="14sp"
-                android:textColor="@color/colorTextDark"
+                android:textColor="@color/text_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title" />
@@ -38,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="@color/colorTextLight"
+                android:textColor="@color/text_dark_secondary"
                 android:text="Author" />
 
             <TextView
@@ -50,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTextDark"
+                android:textColor="@color/text_dark"
                 android:textSize="11sp"
                 android:text="Tags"/>
 
@@ -62,13 +64,15 @@
                 android:padding="5dp"
                 app:tag_horizontal_padding="3dp"
                 app:tag_vertical_padding="3dp"
-                app:tag_text_color="@android:color/white"
-                app:container_background_color="@color/colorPrimary"
                 app:tag_text_size="10sp"
                 app:tag_corner_radius="5dp"
                 app:container_enable_drag="false"
                 app:horizontal_interval="10dp"
                 app:vertical_interval="10dp"
+                app:tag_border_width="0dp"
+                app:container_border_color="@color/primary"
+                app:tag_theme="none"
+                app:container_background_color="@color/primary"
                 app:container_border_width="0dp"/>
         </LinearLayout>
     </LinearLayout>

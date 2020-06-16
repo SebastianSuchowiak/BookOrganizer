@@ -19,11 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/text_dark_secondary">
             <EditText android:id="@+id/input_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/text_dark_secondary"
                 android:hint="Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,11 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/text_dark_secondary">
             <EditText android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:textColor="@color/text_dark"
                 android:hint="Password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,6 +53,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
+            android:textColor="@color/text_dark_secondary"
             android:text="Create Account"/>
 
         <TextView android:id="@+id/link_login"
@@ -56,6 +62,7 @@
             android:layout_marginBottom="24dp"
             android:text="Already a member? Login"
             android:gravity="center"
+            android:textColor="@color/text_dark_secondary"
             android:textSize="16dip"/>
 
     </LinearLayout>
