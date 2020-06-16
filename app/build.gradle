@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
 }
 
@@ -34,6 +38,8 @@ dependencies {
     implementation 'co.lujun:androidtagview:1.1.7'
     implementation 'androidx.appcompat:appcompat:1.0.1'
     implementation 'commons-codec:commons-codec:1.14'
+    implementation "androidx.navigation:navigation-fragment:2.3.0-rc01"
+    implementation "androidx.navigation:navigation-ui:2.3.0-rc01"
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.android.material:material:1.0.0'

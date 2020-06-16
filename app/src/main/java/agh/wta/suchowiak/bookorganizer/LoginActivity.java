@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
@@ -70,35 +70,34 @@ public class LoginActivity extends AppCompatActivity {
         String name = _nameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        Boolean success = false;
+        boolean success = false;
         try {
             success = UserRepository.login(name, password);
         }catch(Exception e){
             _loginButton.setError(e.getMessage());
         }
-        final Boolean returnSuccess = success;
+        final boolean returnSuccess = success;
 
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        if(returnSuccess) {
-                            onLoginSuccess();
-                        }
-                        else {
-                            onLoginFailed();
-                        }
-                        progressDialog.dismiss();
+                () -> {
+                    if(returnSuccess) {
+                        onLoginSuccess();
                     }
-                }, 3000);
+                    else {
+                        onLoginFailed();
+                    }
+                    progressDialog.dismiss();
+                }, 2000);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                // By default we just finish the Activity and log them in automatically
                 this.finish();
+
             }
         }
     }
@@ -111,12 +110,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        finish();
+        Log.d(TAG, "Login successful");
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        //intent.putExtra("USER_ID", sessionId);
+        startActivity(intent);
+        this.finish();
     }
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
