@@ -1,55 +1,94 @@
 package agh.wta.suchowiak.bookorganizer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import java.sql.Array;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import books.model.Book;
-import books.model.Status;
 import books.model.Tag;
+import books.repository.BookRepository;
+import lombok.val;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private LiveData<NavController> currentNavController = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Book> books = new ArrayList<>();
+        setupBottomNavigationBar();
+    }
 
-        List<Tag> tags = Arrays.asList(
-                new Tag("top10", "#8803DA"),
-                new Tag("fantasy", "#3503DA"));
+    private void setupBottomNavigationBar() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.achievement:
+                        Toast.makeText(MainActivity.this, "Achievements", Toast.LENGTH_SHORT).show();
+                        openFragment(new AchievementFragment());
+                    case R.id.tag:
+                        Toast.makeText(MainActivity.this, "Tags", Toast.LENGTH_SHORT).show();
+                        openFragment(new TagsFragment());
+                        break;
+                    case R.id.home:
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        openFragment(new BooksListFragment());
+                        break;
+                    case R.id.statistics:
+                        Toast.makeText(MainActivity.this, "Statistics", Toast.LENGTH_SHORT).show();
+                        openFragment(new StatisticsFragment());
+                        break;
+                    case R.id.settings:
+                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                        openFragment(new SettingsFragment());
+                        break;
+                }
+                return true;
+            }
+        });
 
-        List<String> authors = Collections.singletonList("Brandon Sanderson");
+        bottomNavigationView.setSelectedItemId(R.id.home);
+    }
 
-        Book book1 = new Book("The Way of Kings", authors, 10L, Status.HAVE_TO_READ, tags, "", 8, "");
-        Book book2 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book3 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book4 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
+    private void openFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        books.add(book4);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
 
-        recyclerView = findViewById(R.id.booksView);
-        layoutManager = new LinearLayoutManager(this);
-        adapter = new BookViewAdapter(books);
+        transaction.commit();
+    }
 
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+    @Override
+    public boolean onSupportNavigateUp() {
+        if(currentNavController == null || currentNavController.getValue() == null) {
+            return false;
+        }
+        return currentNavController.getValue().navigateUp();
     }
 }

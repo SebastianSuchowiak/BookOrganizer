@@ -96,9 +96,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(getApplicationContext(),BookViewAdapter.class);
-                startActivity(intent);
                 this.finish();
+
             }
         }
     }
@@ -112,6 +111,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         Log.d(TAG, "Login successful");
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        //intent.putExtra("USER_ID", sessionId);
+        startActivity(intent);
+        this.finish();
     }
 
     public void onLoginFailed() {

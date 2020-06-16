@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import books.MongoUserCollectionProvider;
 import books.Password;
@@ -36,6 +37,9 @@ public class UserRepository {
         if (!Password.check(password, user.getHashedPassword())) {
             throw new IllegalArgumentException("Password is not valid");
         }
+
+        storeUserBooks(user.getBooks());
+
         return true;
     }
 
@@ -86,5 +90,9 @@ public class UserRepository {
         new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
         collection.replaceOne(and(eq("name", user.getName()), eq("_id", user.getId())), user);
+    }
+
+    private static void storeUserBooks(ArrayList<Book> userBooks){
+        BookRepository.setUserBooks(userBooks);
     }
 }
