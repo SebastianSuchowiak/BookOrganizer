@@ -24,25 +24,6 @@ public class BooksListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.books_list_fragment, container, false);
         ArrayList<Book> books = BookRepository.getUserBooks();
-        for(Book b : books){
-            // b.setAuthors();
-        }
-
-        List<Tag> tags = Arrays.asList(
-                new Tag("top10", "#8803DA"),
-                new Tag("fantasy", "#3503DA"));
-
-        List<String> authors = Collections.singletonList("Brandon Sanderson");
-
-        /*Book book1 = new Book("The Way of Kings", authors, 10L, Status.HAVE_TO_READ, tags, "", 8, "");
-        Book book2 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book3 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book4 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");*/
-
-        /*books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        books.add(book4);*/
 
         recyclerView = rootView.findViewById(R.id.booksView);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -51,7 +32,6 @@ public class BooksListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 
@@ -62,7 +42,5 @@ public class BooksListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 }

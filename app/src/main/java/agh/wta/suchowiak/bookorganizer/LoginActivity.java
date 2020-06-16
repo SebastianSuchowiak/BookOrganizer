@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(true);
         Log.d(TAG, "Login successful");
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        //intent.putExtra("USER_ID", sessionId);
         startActivity(intent);
         this.finish();
     }
