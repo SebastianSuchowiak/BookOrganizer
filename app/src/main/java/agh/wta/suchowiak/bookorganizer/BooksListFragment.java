@@ -1,11 +1,14 @@
 package agh.wta.suchowiak.bookorganizer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,12 +21,15 @@ import books.model.Book;
 import books.model.Tag;
 import books.repository.BookRepository;
 
-public class BooksListFragment extends Fragment {
+public class BooksListFragment extends Fragment implements BookViewAdapter.OnItemClicked {
+
+    ArrayList<Book> books;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.books_list_fragment, container, false);
-        ArrayList<Book> books = BookRepository.getUserBooks();
+        books = BookRepository.getUserBooks();
         for(Book b : books){
             // b.setAuthors();
         }
@@ -34,23 +40,13 @@ public class BooksListFragment extends Fragment {
 
         List<String> authors = Collections.singletonList("Brandon Sanderson");
 
-        /*Book book1 = new Book("The Way of Kings", authors, 10L, Status.HAVE_TO_READ, tags, "", 8, "");
-        Book book2 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book3 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");
-        Book book4 = new Book("The Way of Kings", new ArrayList<>(authors), 10L, Status.HAVE_TO_READ, new ArrayList<>(tags), "", 8, "");*/
-
-        /*books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        books.add(book4);*/
 
         recyclerView = rootView.findViewById(R.id.booksView);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BookViewAdapter(books);
-
+        BookViewAdapter adapter = new BookViewAdapter(books);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
+        adapter.setOnClick(this);
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -62,7 +58,21 @@ public class BooksListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
 
+    void showBookDetails(int position){
 
+        Fragment fragment = new BookDetailsFragment(books.get(position));
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        showBookDetails(position);
     }
 }

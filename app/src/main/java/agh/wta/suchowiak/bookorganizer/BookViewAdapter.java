@@ -1,5 +1,6 @@
 package agh.wta.suchowiak.bookorganizer;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,11 @@ import lombok.Setter;
 public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookViewHolder> {
 
     private ArrayList<Book> books;
+    private OnItemClicked onClick;
+
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
 
     @Getter
     static class BookViewHolder extends RecyclerView.ViewHolder {
@@ -53,16 +59,30 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull final BookViewHolder holder, int position) {
+        Log.d("ONBINDVIEw",":)");
         Book book = books.get(position);
+
+        holder.title.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(position);
+            }
+        });
 
         holder.getAuthor().setText(book.getAuthorsRep());
         holder.getTitle().setText(book.getTitle());
-        holder.getScore().setText(book.getScore().toString());
+        holder.getScore().setText("Score: " + book.getScore().toString());
         book.getTags().forEach((tag) -> holder.getTags().addTag(tag.getName()));
     }
 
     @Override
     public int getItemCount() {
         return books.size();
+    }
+
+    public void setOnClick(OnItemClicked onClick)
+    {
+        Log.d("aaa","LISTERNME");
+        this.onClick=onClick;
     }
 }
