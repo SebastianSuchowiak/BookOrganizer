@@ -59,7 +59,6 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull final BookViewHolder holder, int position) {
-        Log.d("ONBINDVIEw",":)");
         Book book = books.get(position);
 
         holder.title.setOnClickListener(new View.OnClickListener()  {
@@ -82,7 +81,6 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
 
     public void setOnClick(OnItemClicked onClick)
     {
-        Log.d("aaa","LISTERNME");
         this.onClick=onClick;
     }
 }

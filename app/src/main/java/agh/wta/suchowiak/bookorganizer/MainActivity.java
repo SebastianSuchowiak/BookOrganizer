@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.achievement:
                         Toast.makeText(MainActivity.this, "Achievements", Toast.LENGTH_SHORT).show();
                         openFragment(new AchievementFragment());
+                        break;
                     case R.id.tag:
                         Toast.makeText(MainActivity.this, "Tags", Toast.LENGTH_SHORT).show();
                         openFragment(new TagsFragment());
