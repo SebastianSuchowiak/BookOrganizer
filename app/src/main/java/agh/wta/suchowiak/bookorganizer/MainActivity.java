@@ -1,5 +1,10 @@
 package agh.wta.suchowiak.bookorganizer;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,28 +12,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import books.model.Book;
-import books.model.Tag;
 import books.repository.BookRepository;
-import lombok.val;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        openFragment(new BooksListFragment());
+                        openFragment(new BooksListFragment(BookRepository.getUserBooks()));
                         break;
                     case R.id.statistics:
                         Toast.makeText(MainActivity.this, "Statistics", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,5 @@
 package agh.wta.suchowiak.bookorganizer;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +17,13 @@ import java.util.stream.Collectors;
 import books.model.Book;
 import books.model.Tag;
 import co.lujun.androidtagview.TagContainerLayout;
-import co.lujun.androidtagview.TagView;
 import lombok.Getter;
 
 public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookViewHolder> {
 
-    private ArrayList<Book> books;
+    private List<Book> books;
 
-    public BookViewAdapter(ArrayList<Book> books) {
+    public BookViewAdapter(List<Book> books) {
         this.books = books;
     }
 
