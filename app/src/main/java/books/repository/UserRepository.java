@@ -7,6 +7,8 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import books.MongoUserCollectionProvider;
 import books.Password;
 import books.model.Achievement;
@@ -17,6 +19,7 @@ import books.model.User;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
+@Singleton
 public class UserRepository {
 
     public static boolean userExists(String name) {

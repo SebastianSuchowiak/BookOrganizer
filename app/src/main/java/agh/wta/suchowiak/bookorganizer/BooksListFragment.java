@@ -1,16 +1,16 @@
 package agh.wta.suchowiak.bookorganizer;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -48,7 +48,15 @@ public class BooksListFragment extends Fragment {
 
         if (backgroundColor != -1) {
             rootView.findViewById(R.id.booksView).setBackgroundColor(backgroundColor);
+        } else {
+            FloatingActionButton fab = rootView.findViewById(R.id.fab);
+            Intent intent = new Intent(getActivity(), NewBookActivity.class);
+            fab.setOnClickListener(view -> {
+                startActivity(intent);
+            });
         }
+
+
 
         return rootView;
     }

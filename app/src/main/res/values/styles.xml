@@ -10,8 +10,8 @@
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/stars</item>
-        <item name="colorControlActivated">@color/primary_darker</item>
+        <item name="colorControlNormal">@color/primary_darker</item>
+        <item name="colorControlActivated">@color/stars</item>
     </style>
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">

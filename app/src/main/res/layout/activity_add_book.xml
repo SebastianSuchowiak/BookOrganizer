@@ -81,20 +81,15 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:textSize="18sp"
-            android:text="Rate"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <RatingBar android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="0"
-            style="@style/RatingBar"
-            android:stepSize="0.5"
-            android:layout_width="wrap_content" />
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:layout_width="wrap_content"
+            android:id="@+id/new_book_rate"
+            android:layout_height="wrap_content"
+            android:numStars="10"
+            android:stepSize="1"
+            android:layout_margin="4dp"
+            android:theme="@style/RatingBar"
+            style="@style/Widget.MaterialRatingBar.RatingBar" />
 
         <EditText
             android:textAlignment="center"
@@ -124,18 +119,21 @@
             <RadioButton android:id="@+id/radio_finished"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
                 android:text="@string/finished"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/radio_reading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
                 android:text="@string/reading"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/radio_to_read"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
                 android:layout_weight="1"
                 android:text="@string/to_read"
                 android:onClick="onRadioButtonClicked"/>
@@ -176,6 +174,7 @@
         android:orientation="vertical" >
 
         <Button
+            android:id="@+id/new_book_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
