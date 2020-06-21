@@ -33,7 +33,6 @@ public class BookRepository {
     public static void insertBook(){
        // MongoCollection collection = MongoUserCollectionProvider.getUsersCollection();
         User user = UserRepository.user;
-        System.out.println(user);
         user.setBooks(getUserBooks());
         UserRepository.updateUser(user);
     }

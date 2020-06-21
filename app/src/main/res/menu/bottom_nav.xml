@@ -36,9 +36,5 @@
         android:icon="@drawable/ic_equalizer_black_24dp"
         android:title="Statistics"
         />
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings"
-        />
+
 </menu>

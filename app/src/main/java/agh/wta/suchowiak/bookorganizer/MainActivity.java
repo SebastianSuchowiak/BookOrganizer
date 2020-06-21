@@ -55,10 +55,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Statistics", Toast.LENGTH_SHORT).show();
                         openFragment(new StatisticsFragment());
                         break;
-                    case R.id.settings:
-                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                        openFragment(new SettingsFragment());
-                        break;
                 }
                 return true;
             }

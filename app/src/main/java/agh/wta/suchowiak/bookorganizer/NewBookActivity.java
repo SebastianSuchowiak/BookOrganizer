@@ -17,6 +17,7 @@ import books.model.Book;
 import books.model.Status;
 import books.model.User;
 import books.model.Tag;
+import books.repository.AddBookAsync;
 import books.repository.BookRepository;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,8 +92,9 @@ public class NewBookActivity extends AppCompatActivity {
             ArrayList<Book> books = BookRepository.getUserBooks();
             books.add(newBook);
             BookRepository.setUserBooks(books);
-            BookRepository.insertBook();
-
+            //BookRepository.insertBook();
+            new AddBookAsync().execute();
+            user.setBooks(BookRepository.getUserBooks());
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
