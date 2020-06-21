@@ -66,10 +66,10 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
                     .collect(Collectors.toList());
             List<String> tags = book.getTags().stream().map(Tag::getName).collect(Collectors.toList());
             holder.getTags().setTags(tags, colors);
+
         }
 
         holder.getScore().setText("Score: " + book.getScore().toString());
-        book.getTags().forEach((tag) -> holder.getTags().addTag(tag.getName()));
     }
 
     @Override

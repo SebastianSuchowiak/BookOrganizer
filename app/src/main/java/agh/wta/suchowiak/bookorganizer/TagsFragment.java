@@ -49,7 +49,7 @@ public class TagsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         adapter = new agh.wta.suchowiak.tagorganizer.TagViewAdapter(tagsBooks);
         adapter.setOnItemClickListener(position -> {
-            List<Book> currentBooks = tagsBooks.get(position).getValue();
+            ArrayList<Book> currentBooks = (ArrayList<Book>) tagsBooks.get(position).getValue();
             int color = Color.parseColor(tagsBooks.get(position).getKey().getColor());
             BooksListFragment nextFrag= new BooksListFragment(currentBooks, color);
             getActivity().getSupportFragmentManager().beginTransaction()

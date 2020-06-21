@@ -47,7 +47,6 @@ public class BooksListFragment extends Fragment implements BookViewAdapter.OnIte
     public BooksListFragment(ArrayList<Book> books, int color) {
         this.books = books;
         backgroundColor = color;
-        this.user = user;
     }
 
     @Override
