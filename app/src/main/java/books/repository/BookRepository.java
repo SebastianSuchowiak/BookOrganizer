@@ -1,11 +1,17 @@
 package books.repository;
 
+import android.util.Log;
+
+import com.mongodb.client.MongoCollection;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
 
+import books.MongoUserCollectionProvider;
 import books.model.Book;
+import books.model.User;
 
 
 public class BookRepository {
@@ -22,5 +28,13 @@ public class BookRepository {
 
     public static void setUserBooks(ArrayList<Book> userBooks) {
         BookRepository.userBooks = userBooks;
+    }
+
+    public static void insertBook(){
+       // MongoCollection collection = MongoUserCollectionProvider.getUsersCollection();
+        User user = UserRepository.user;
+        System.out.println(user);
+        user.setBooks(getUserBooks());
+        UserRepository.updateUser(user);
     }
 }

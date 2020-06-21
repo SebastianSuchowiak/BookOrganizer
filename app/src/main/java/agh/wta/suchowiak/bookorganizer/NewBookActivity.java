@@ -16,6 +16,7 @@ import java.util.List;
 import books.model.Book;
 import books.model.Status;
 import books.model.User;
+import books.model.Tag;
 import books.repository.BookRepository;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,8 +86,13 @@ public class NewBookActivity extends AppCompatActivity {
             newBook.setReview(review.getText().toString());
             newBook.setTitle(title.getText().toString());
 
-            user.getBooks().add(newBook);
-            System.out.println(newBook);
+            newBook.setTags(new ArrayList<Tag>());
+            newBook.setImageUrl("");
+            ArrayList<Book> books = BookRepository.getUserBooks();
+            books.add(newBook);
+            BookRepository.setUserBooks(books);
+            BookRepository.insertBook();
+
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);

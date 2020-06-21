@@ -35,7 +35,7 @@ public class BookConverter {
         book.setAuthors((List<String>) document.get("authors"));
         book.setStatus(Status.valueOf(document.getString("status")));
         book.setImageUrl(document.getString("imageUrl"));
-        book.setScore(document.getDouble("score").intValue());
+        book.setScore(document.getInteger("score").intValue());
         book.setReview(document.getString("review"));
         List<Tag> tags = new ArrayList<>();
         for (Document tagDocument: (List<Document>) document.get("tags")) {
