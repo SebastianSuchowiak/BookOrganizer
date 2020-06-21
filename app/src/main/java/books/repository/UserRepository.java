@@ -21,6 +21,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class UserRepository {
 
+    public static User user;
+
     public static boolean userExists(String name) {
         new MongoUserCollectionProvider();
         MongoCollection<User> collection = MongoUserCollectionProvider.getUsersCollection();
@@ -39,6 +41,8 @@ public class UserRepository {
         if (!Password.check(password, user.getHashedPassword())) {
             throw new IllegalArgumentException("Password is not valid");
         }
+        System.out.println("LOGIN SUCC");
+        UserRepository.user = user;
 
         storeUserBooks(user.getBooks());
 
