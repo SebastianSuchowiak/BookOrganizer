@@ -147,6 +147,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton android:id="@+id/tag_fantasy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="fantasy"
+                android:onClick="onRadioButtonTagClicked"/>
+
+            <RadioButton android:id="@+id/tag_horror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="horror"
+                android:onClick="onRadioButtonTagClicked"/>
+
+            <RadioButton android:id="@+id/tag_for_kids"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="for kids"
+                android:onClick="onRadioButtonTagClicked"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton android:id="@+id/tag_long"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="long"
+                android:onClick="onRadioButtonTagClicked"/>
+
+            <RadioButton android:id="@+id/tag_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="short"
+                android:onClick="onRadioButtonTagClicked"/>
+
+            <RadioButton android:id="@+id/tag_the_best"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:layout_weight="1"
+                android:text="the best"
+                android:onClick="onRadioButtonTagClicked"/>
+        </LinearLayout>
+
         <co.lujun.androidtagview.TagContainerLayout
             android:id="@+id/tags"
             android:layout_width="match_parent"
