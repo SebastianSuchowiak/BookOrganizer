@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
 
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import books.model.User;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.achievement:
                         Toast.makeText(MainActivity.this, "Achievements", Toast.LENGTH_SHORT).show();
                         openFragment(new AchievementFragment());
+                        break;
                     case R.id.tag:
                         Toast.makeText(MainActivity.this, "Tags", Toast.LENGTH_SHORT).show();
                         openFragment(new TagsFragment());
@@ -86,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return currentNavController.getValue().navigateUp();
     }
+
 }

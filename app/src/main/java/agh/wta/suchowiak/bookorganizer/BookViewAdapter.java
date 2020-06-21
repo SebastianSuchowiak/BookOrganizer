@@ -23,6 +23,12 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
 
     private List<Book> books;
 
+    private OnItemClicked onClick;
+
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
+
     public BookViewAdapter(List<Book> books) {
         this.books = books;
     }
@@ -39,11 +45,18 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
     public void onBindViewHolder(@NonNull final BookViewHolder holder, int position) {
         Book book = books.get(position);
 
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(position);
+            }
+        });
+
         holder.getAuthor().setText(book.getAuthorsRep());
         holder.getTitle().setText(book.getTitle());
         holder.getScore().setText(book.getScore().toString());
 
-        if ( book.getTags() != null) {
+        if (book.getTags() != null) {
             List<int[]> colors = book.getTags()
                     .stream()
                     .map((tag) -> {
@@ -55,6 +68,8 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
             holder.getTags().setTags(tags, colors);
         }
 
+        holder.getScore().setText("Score: " + book.getScore().toString());
+        book.getTags().forEach((tag) -> holder.getTags().addTag(tag.getName()));
     }
 
     @Override
@@ -78,5 +93,10 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
             score = itemView.findViewById(R.id.score);
             tags = itemView.findViewById(R.id.tags);
         }
+
+    }
+
+    public void setOnClick(OnItemClicked onClick) {
+        this.onClick = onClick;
     }
 }

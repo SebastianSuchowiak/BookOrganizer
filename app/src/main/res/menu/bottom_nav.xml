@@ -23,7 +23,7 @@
         />
     <item
         android:id="@+id/tag"
-        android:icon="@drawable/ic_label_outline_black_24dp"
+        android:icon="@drawable/ic_bookmark_black_24dp"
         android:title="Tags"
         />
     <item
