@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_book"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:textAlignment="center"
+                android:background="@color/primary_dark"
+                android:id="@+id/new_book_cover"
+                android:layout_width="120dp"
+                android:layout_height="160dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:textAlignment="center"
+                    android:background="@drawable/text_view_background"
+                    android:textSize="16sp"
+                    android:padding="5dp"
+                    android:layout_margin="4dp"
+                    android:textColorHint="@color/text_dark_secondary"
+                    android:textColor="@color/text_dark"
+                    android:hint="Title"
+                    android:id="@+id/new_book_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:textAlignment="center"
+                    android:background="@drawable/text_view_background"
+                    android:textSize="16sp"
+                    android:padding="5dp"
+                    android:layout_margin="4dp"
+                    android:textColorHint="@color/text_dark_secondary"
+                    android:textColor="@color/text_dark"
+                    android:hint="Author"
+                    android:id="@+id/new_book_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:textAlignment="center"
+                    android:background="@drawable/text_view_background"
+                    android:textSize="16sp"
+                    android:padding="5dp"
+                    android:layout_margin="4dp"
+                    android:textColorHint="@color/text_dark_secondary"
+                    android:textColor="@color/text_dark"
+                    android:id="@+id/new_book_isbn"
+                    android:hint="ISBN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:textSize="18sp"
+            android:text="Rate"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RatingBar android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="0"
+            style="@style/RatingBar"
+            android:stepSize="0.5"
+            android:layout_width="wrap_content" />
+
+        <EditText
+            android:textAlignment="center"
+            android:background="@drawable/text_view_background"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:layout_margin="4dp"
+            android:textColorHint="@color/text_dark_secondary"
+            android:textColor="@color/text_dark"
+            android:hint="Review"
+            android:id="@+id/new_book_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finished"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_reading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reading"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_to_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/to_read"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="5dp"
+            app:container_background_color="@color/primary"
+            app:container_border_color="@color/primary"
+            app:container_border_width="0dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_border_width="0dp"
+            app:tag_corner_radius="5dp"
+            app:tag_horizontal_padding="3dp"
+            app:tag_text_size="10sp"
+            app:tag_theme="none"
+            app:tag_vertical_padding="3dp"
+            app:vertical_interval="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:paddingHorizontal="30dp"
+            android:text="Add new book"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

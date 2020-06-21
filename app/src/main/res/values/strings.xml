@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BookOrganizer</string>
+    <string name="add_new_book">Add new book</string>
+    <string name="finished">finished</string>
+    <string name="reading">reading</string>
+    <string name="to_read">to read</string>
 </resources>
