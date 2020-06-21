@@ -15,23 +15,33 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import books.model.Book;
+import books.model.User;
+import books.repository.BookRepository;
 
 public class BooksListFragment extends Fragment {
 
     private List<Book> books;
-    int backgroundColor;
+    private int backgroundColor;
+    private User user;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public BooksListFragment(List<Book> books) {
-        this.books = books;
+    public BooksListFragment() {
+        books = BookRepository.getUserBooks();
         backgroundColor = -1;
+    }
+
+    public BooksListFragment(List<Book> books, User user) {
+        this.books = user.getBooks();
+        backgroundColor = -1;
+        this.user = user;
     }
 
     public BooksListFragment(List<Book> books, int color) {
         this.books = books;
         backgroundColor = color;
+        this.user = user;
     }
 
     @Override
@@ -51,6 +61,7 @@ public class BooksListFragment extends Fragment {
         } else {
             FloatingActionButton fab = rootView.findViewById(R.id.fab);
             Intent intent = new Intent(getActivity(), NewBookActivity.class);
+            intent.putExtra("user", user);
             fab.setOnClickListener(view -> {
                 startActivity(intent);
             });

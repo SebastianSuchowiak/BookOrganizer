@@ -2,12 +2,13 @@ package books.model;
 import lombok.*;
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-public class Book {
+public class Book implements Serializable {
     private String title;
     private List<String> authors;
     private double isbn;

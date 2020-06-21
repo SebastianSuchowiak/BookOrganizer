@@ -43,15 +43,18 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
         holder.getTitle().setText(book.getTitle());
         holder.getScore().setText(book.getScore().toString());
 
-        List<int[]> colors = book.getTags()
-                .stream()
-                .map((tag) -> {
-                    int mainColor = Color.parseColor(tag.getColor());
-                    return new int[]{mainColor, mainColor, Color.BLACK, mainColor};
-                })
-                .collect(Collectors.toList());
-        List<String> tags = book.getTags().stream().map(Tag::getName).collect(Collectors.toList());
-        holder.getTags().setTags(tags, colors);
+        if ( book.getTags() != null) {
+            List<int[]> colors = book.getTags()
+                    .stream()
+                    .map((tag) -> {
+                        int mainColor = Color.parseColor(tag.getColor());
+                        return new int[]{mainColor, mainColor, Color.BLACK, mainColor};
+                    })
+                    .collect(Collectors.toList());
+            List<String> tags = book.getTags().stream().map(Tag::getName).collect(Collectors.toList());
+            holder.getTags().setTags(tags, colors);
+        }
+
     }
 
     @Override

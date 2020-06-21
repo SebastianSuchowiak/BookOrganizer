@@ -7,10 +7,14 @@ import javax.inject.Singleton;
 
 import books.model.Book;
 
-@Singleton
+
 public class BookRepository {
 
     private static ArrayList<Book> userBooks;
+
+    private BookRepository() {
+
+    }
 
     public static ArrayList<Book> getUserBooks(){
         return userBooks;

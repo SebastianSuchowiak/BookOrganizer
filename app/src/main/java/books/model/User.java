@@ -3,12 +3,13 @@ package books.model;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Data
-public class User {
+public class User implements Serializable {
     private ObjectId id;
     private String hashedPassword;
     private ArrayList<Book> books;

@@ -15,6 +15,7 @@ import java.util.List;
 
 import books.model.Book;
 import books.model.Status;
+import books.model.User;
 import books.repository.BookRepository;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,11 +36,13 @@ public class NewBookActivity extends AppCompatActivity {
     Button button;
 
     private Book newBook;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        user = (User) getIntent().getSerializableExtra("user");
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
@@ -82,11 +85,10 @@ public class NewBookActivity extends AppCompatActivity {
             newBook.setReview(review.getText().toString());
             newBook.setTitle(title.getText().toString());
 
-            ArrayList<Book> books = BookRepository.getUserBooks();
-            books.add(newBook);
-            BookRepository.setUserBooks(books);
+            user.getBooks().add(newBook);
             System.out.println(newBook);
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
     }

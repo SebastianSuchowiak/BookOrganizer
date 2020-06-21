@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import books.model.User;
 import books.repository.BookRepository;
 import books.repository.UserRepository;
 import butterknife.BindView;
@@ -82,7 +83,11 @@ public class LoginActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 () -> {
                     if(returnSuccess) {
-                        onLoginSuccess();
+                        try {
+                            onLoginSuccess(UserRepository.getUser(name, password));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     else {
                         onLoginFailed();
@@ -109,10 +114,14 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess() {
+    public void onLoginSuccess(User user) {
         _loginButton.setEnabled(true);
         Log.d(TAG, "Login successful");
+
+        BookRepository.setUserBooks(user.getBooks());
+
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
         this.finish();
     }

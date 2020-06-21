@@ -19,7 +19,6 @@ import books.model.User;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
-@Singleton
 public class UserRepository {
 
     public static boolean userExists(String name) {

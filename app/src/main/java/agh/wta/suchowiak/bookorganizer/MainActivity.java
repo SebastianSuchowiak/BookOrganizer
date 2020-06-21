@@ -15,17 +15,20 @@ import androidx.navigation.NavController;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import books.model.User;
 import books.repository.BookRepository;
 
 public class MainActivity extends AppCompatActivity {
 
     private LiveData<NavController> currentNavController = null;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        user = (User) getIntent().getSerializableExtra("user");
         setupBottomNavigationBar();
     }
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        openFragment(new BooksListFragment(BookRepository.getUserBooks()));
+                        openFragment(new BooksListFragment(BookRepository.getUserBooks(), user));
                         break;
                     case R.id.statistics:
                         Toast.makeText(MainActivity.this, "Statistics", Toast.LENGTH_SHORT).show();
